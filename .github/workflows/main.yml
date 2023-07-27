@@ -1,0 +1,22 @@
+name: Deploy Python
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Python
+        run: sudo apt install python3
+
+      - name: Install dependencies
+        run: pip3 install -r requirements.txt
+
+      - name: Deploy
+        run: python3 new_blackjack.py
