@@ -1,22 +1,27 @@
-name: Deploy Python
+name: Blackjack Deployment
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Python
-        run: sudo apt install python3
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
       - name: Install dependencies
-        run: pip3 install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
 
-      - name: Deploy
-        run: python3 new_blackjack.py
+      - name: Deploy the new_blackjack.py script
+        run: |
+          python3 new_blackjack.py
